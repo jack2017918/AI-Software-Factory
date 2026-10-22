@@ -1,0 +1,6 @@
+---
+description: 即使从 Factory 目录打开，产品也写到并列的 AI-Foreign
+alwaysApply: true
+---
+
+产品产物写到并列目录 `../AI-Foreign/`（工作区根下是 `AI-Foreign/`）。这是跨目录合法写入。路径表：`.ai-team/write-map.md`。不要把插件或 `product/buyers` 写进本仓库。

@@ -76,3 +76,42 @@ V1.0.0 必做：找客户、意向分档、基于记忆的 Email/WhatsApp/Linked
 
 本仓库：`.ai-team/`、`AGENTS.md`、`TASKS.md`、`.memory/`、`docs/architecture/ai-rd-multi-agent.md`、`docs/prds/phase0-smoke.md`、`docs/architecture/phase0-smoke-notes.md`、Ruflo 运行时、`archive/`。
 产品文档与后续代码在 AI-Foreign。无产品应用代码。
+
+## 就绪度评估（2026-10-20 晚）
+
+当时结论：契约层够用，自动化与持久记忆不够。卡点是「分目录被理解成禁止跨目录写」。
+
+## 已解开的卡点（同日稍后）
+
+分目录只隔离资产。Cursor 必须打开父目录 `AI-Software/`，Factory 角色**必须**写 `AI-Foreign/`。
+
+- 路径权威：`.ai-team/write-map.md`；父级规则 `.cursor/rules/factory-drives-foreign.mdc`
+- Agent 映射：`.ai-team/agent-map.md` + `.claude/agents/factory/factory-*.md`
+- 产品 Mission：`.ai-team/missions/v1.0.0-build.md`
+- 研发记忆：`scripts/rd-memory.py` seed 既有 Handoff 到 `rd/*`，可用同一 key 读回
+- 仍未做：T3 `apps/web` 实现与验收、E2E、Ruflo Swarm 真拉起（可选第 8 步）。形态涟漪已关闭。2026-10-21 T3 已派给 factory-frontend（ASSIGNED），未 ACCEPTED，未派 T5。
+
+## Cursor 多 Agent 操练（2026-10-21）
+
+第 1–7 步已通过。空对话可用 `rd/handoffs` key `cursor-drill` / `cursor-drill-parallel` 读回。日常用法：人类只说「启动 Mission …」；Coordinator 派子 Agent；专职角色只写 write-map 路径；Handoff Markdown + `rd-memory.py upsert` 缺一不可。
+
+## 人类拍板（2026-10-21）
+
+V1 Agent 外贸工作台形态 = **本机网页**，不是 Chrome 扩展。2026-10-21 已写入 `AI-Foreign/docs/architecture/v1.0.0-tech-stack.md`（React + Vite + Tailwind，调用 `http://127.0.0.1:3921`，目录 `apps/web`）和 write-map。原型在 `AI-Foreign/docs/prototype/`，已验收。形态涟漪 `v1.0.0-workbench-form-ripple` 已关闭：plans / design / tech-stack / 角色契约已对齐本机网页与 `apps/web`。`v1.0.0-build` 的 T3 已派给 factory-frontend，key `v1.0.0-build:coordinator-frontend`，状态 ASSIGNED。T5 未派。
+
+## 结论怎么写（2026-10-22，人类负责人）
+
+人类负责人指出：结论性输出太繁杂，不易读懂。经过一年升级，这个问题没有明显改变，对此失望。本条用于以后每次收束回答。
+
+- 先写结论，三五句内说完。
+- 一句能说清的，不要拆成多层标题和长清单。
+- 不重复已经说过的背景。
+- 只留读者要做的下一步。
+
+同文已 upsert：`rd/conventions` key=`conclusion-output`。
+
+## 派工前清禁止句（2026-10-22）
+
+人类负责人确认：本会话首句已说涟漪关闭、只派 T3，Coordinator 仍把「不要写 apps/web」和计划里的「阻塞」留在 Open risks，未派 Architect 与 Product Manager 修改。这就是 T3 在文档上继续阻塞的原因。此类遗漏人很难看见，必须靠门禁，不能靠事后发现。
+
+纪律已写入 `workflow.md` 门禁第 9 条：派工前，文件里若还写着禁止该任务，先派该文件的负责角色改掉并验收；只写 Open risks，或用「只派某一角色」跳过，派工无效。`rd/conventions` key=`dispatch-clear-forbid`。

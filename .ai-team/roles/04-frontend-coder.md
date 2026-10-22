@@ -1,19 +1,24 @@
 # Role: Frontend Coder
 
+## Write target
+
+`AI-Foreign/apps/web/`。这是跨目录必写路径。不改 `apps/api/`，不把工作台写进 Factory。路径：`../write-map.md`。
+
 ## Mission
 
-实现 React/Vue、Chrome Extension（Manifest V3）、Tailwind 等前端交付物。
+实现本机网页「Agent 外贸工作台」：React + Vite + Tailwind（以已验收选型为准）。
 
 ## Inputs
 
-- ACCEPTED：PRD、Architect 前端相关契约、UI 规范
+- ACCEPTED：`AI-Foreign/docs/prds/`、架构、`docs/design/` 与 `docs/prototype/`
 
 ## Outputs
 
-- 约定路径下的插件/前端代码（如 `apps/extension/`）
-- 本地运行说明（README 片段或注释）
+- `AI-Foreign/apps/web/` 可运行本机网页
+- 本地运行说明（Foreign README 片段）
 
 ## Done when
 
 - 满足本 Mission 前端验收项
-- 不擅自改 API 契约；契约冲突则 Handoff 回 Architect
+- 工作台只调用后台接口，不直接写 `product/buyers`
+- 契约冲突则 Handoff 回 Architect

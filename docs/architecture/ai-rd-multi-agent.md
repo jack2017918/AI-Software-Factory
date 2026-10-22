@@ -27,26 +27,31 @@
 
 已安装选型：**Hierarchical Mesh**（`ruflo@3.57.2`，2026-10-20）。Coordinator 统一派活，专职角色在门禁通过后可点对点协作。并发上限 8，记忆后端 hybrid（SQLite + AgentDB，HNSW + 自学习开启）。
 
+工作区根是父目录 `AI-Software/`。两个子目录隔离资产，不隔离写入。产品 Mission 的代码与文档写 `AI-Foreign/`，编排写 `AI-Software-Factory/`。路径表：`.ai-team/write-map.md`。
+
 ```
 人类负责人（目标 / 审批 / 权限边界）
         │
         ▼
- Coordinator（任务拆解、路由、验收门禁、回滚）
-   ├── Product Manager  → docs/prds/
-   ├── Architect        → docs/architecture/
-   ├── UI/UX Designer   → docs/design/（或规范片段）
-   ├── Frontend Coder   → apps/extension/（或约定路径）
-   ├── Backend Coder    → services/（或约定路径）
-   ├── QA / E2E Tester  → tests/e2e/
-   └── DevOps           → deploy/、CI 配置
+ Coordinator（任务拆解、路由、验收门禁、rd/*）
+   ├── Product Manager  → AI-Foreign/docs/prds/
+   ├── Architect        → AI-Foreign/docs/architecture/
+   ├── UI/UX Designer   → AI-Foreign/docs/design/ 与 docs/prototype/
+   ├── Frontend Coder   → AI-Foreign/apps/web/
+   ├── Backend Coder    → AI-Foreign/apps/api/（product/buyers）
+   ├── QA / E2E Tester  → AI-Foreign/tests/e2e/
+   └── DevOps           → AI-Foreign/ 部署文件（按 Mission）
 ```
+
+专职角色映射：`.ai-team/agent-map.md` → `.claude/agents/factory/factory-*.md`。禁止用 SPARC 通用人格冒充。
 
 并行规则：
 
 - PRD 未验收前，禁止 Frontend/Backend 大规模编码。
-- Architect 契约（API / 记忆方案）未落地前，Backend 不得擅自定库表。
-- Frontend 与 Backend 可在契约冻结后并行。
-- E2E 在 Popup + content script 最小可运行后启动；失败回传 Coder，不由 Coordinator 代写业务代码。
+- Architect 技术选型未 ACCEPTED 前，Backend 不得擅自定库表。
+- Frontend 与 Backend 可在契约冻结后并行，且只改自己的 `apps/` 子目录。
+- E2E 在工作台 + 后台最小可运行后启动；失败回传 Coder，不由 Coordinator 代写业务代码。
+- 跨目录写 `AI-Foreign/` 是必做，不是越权。产品文件不得写回 Factory。
 
 ## 共享记忆命名空间（研发侧）
 
@@ -57,14 +62,14 @@
 | `rd/failures` | 测试失败与修复经验（自迭代） |
 | `rd/conventions` | 代码与目录约定 |
 
-产品侧客户记忆（询盘/成交）**本阶段不建**。
+产品侧采购商记忆在 AI-Foreign，namespace `product/buyers`，不写入上表。研发记忆用 `scripts/rd-memory.py` 读写 `.swarm/memory.db`。
 
 ## 与 Ruflo 的映射
 
 | 本仓库角色 | Ruflo 能力（预期用法） |
 | --- | --- |
 | Coordinator | swarm / goals / workflows |
-| 各专职角色 | 专用 agent 定义 + system prompt（源自 `.ai-team/roles/`） |
+| 各专职角色 | `.claude/agents/factory/factory-*.md`（源自 `.ai-team/roles/`，见 `agent-map.md`） |
 | 长效研发记忆 | agentdb / rag-memory |
 | E2E | ruflo-browser（Playwright） |
 | 质量门禁 | testgen / security-audit（按需开启） |
